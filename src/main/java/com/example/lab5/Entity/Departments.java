@@ -13,12 +13,12 @@ public class Departments {
     @Basic
     @Column(name = "department_name")
     private String departmentName;
-    @Basic
-    @Column(name = "manager_id")
-    private Integer managerId;
-    @Basic
-    @Column(name = "location_id")
-    private Integer locationId;
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Departments manager;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Departments locationId;
 
     public int getDepartmentId() {
         return departmentId;
@@ -36,32 +36,19 @@ public class Departments {
         this.departmentName = departmentName;
     }
 
-    public Integer getManagerId() {
-        return managerId;
+    public Departments getManager() {
+        return manager;
     }
 
-    public void setManagerId(Integer managerId) {
-        this.managerId = managerId;
+    public void setManager(Departments manager) {
+        this.manager = manager;
     }
 
-    public Integer getLocationId() {
+    public Departments getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(Integer locationId) {
+    public void setLocationId(Departments locationId) {
         this.locationId = locationId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Departments that = (Departments) o;
-        return departmentId == that.departmentId && Objects.equals(departmentName, that.departmentName) && Objects.equals(managerId, that.managerId) && Objects.equals(locationId, that.locationId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(departmentId, departmentName, managerId, locationId);
     }
 }

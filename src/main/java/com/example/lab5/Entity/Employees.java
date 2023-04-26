@@ -10,8 +10,9 @@ import java.util.Objects;
 public class Employees {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "employee_id")
-    private int employeeId;
+
+    @Column (name = "employee_id")
+    private String employeeId;
     @Basic
     @Column(name = "first_name")
     private String firstName;
@@ -30,32 +31,24 @@ public class Employees {
     @Basic
     @Column(name = "hire_date")
     private Timestamp hireDate;
-    @Basic
-    @Column(name = "job_id")
-    private String jobId;
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Jobs job;
     @Basic
     @Column(name = "salary")
     private BigDecimal salary;
     @Basic
     @Column(name = "commission_pct")
     private BigDecimal commissionPct;
-    @Basic
-    @Column(name = "manager_id")
-    private Integer managerId;
-    @Basic
-    @Column(name = "department_id")
-    private Integer departmentId;
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Departments managerId;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Departments department;
     @Basic
     @Column(name = "enabled")
     private Integer enabled;
-
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -105,14 +98,6 @@ public class Employees {
         this.hireDate = hireDate;
     }
 
-    public String getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(String jobId) {
-        this.jobId = jobId;
-    }
-
     public BigDecimal getSalary() {
         return salary;
     }
@@ -129,40 +114,49 @@ public class Employees {
         this.commissionPct = commissionPct;
     }
 
-    public Integer getManagerId() {
-        return managerId;
-    }
 
-    public void setManagerId(Integer managerId) {
-        this.managerId = managerId;
-    }
 
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
-    }
 
     public Integer getEnabled() {
         return enabled;
+    }
+
+
+    public Jobs getJob() {
+        return job;
+    }
+
+    public void setJob(Jobs job) {
+        this.job = job;
+    }
+
+    public Departments getDepartment() {
+        return department;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public Departments getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Departments managerId) {
+        this.managerId = managerId;
+    }
+
+    public void setDepartment(Departments department) {
+        this.department = department;
     }
 
     public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employees employees = (Employees) o;
-        return employeeId == employees.employeeId && Objects.equals(firstName, employees.firstName) && Objects.equals(lastName, employees.lastName) && Objects.equals(email, employees.email) && Objects.equals(password, employees.password) && Objects.equals(phoneNumber, employees.phoneNumber) && Objects.equals(hireDate, employees.hireDate) && Objects.equals(jobId, employees.jobId) && Objects.equals(salary, employees.salary) && Objects.equals(commissionPct, employees.commissionPct) && Objects.equals(managerId, employees.managerId) && Objects.equals(departmentId, employees.departmentId) && Objects.equals(enabled, employees.enabled);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(employeeId, firstName, lastName, email, password, phoneNumber, hireDate, jobId, salary, commissionPct, managerId, departmentId, enabled);
-    }
 }

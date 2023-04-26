@@ -41,16 +41,4 @@ public class Countries {
         this.regionId = regionId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Countries countries = (Countries) o;
-        return Objects.equals(countryId, countries.countryId) && Objects.equals(countryName, countries.countryName) && Objects.equals(regionId, countries.regionId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(countryId, countryName, regionId);
-    }
 }
