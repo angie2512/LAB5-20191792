@@ -32,14 +32,9 @@ public class EmployeesController {
 
     @GetMapping(value = {"", "/lista"})
     public String listaEmployees(Model model) {
-<<<<<<< HEAD
 
         List<Employees> listaEmpledos = employeesRepository.listado();
         model.addAttribute("listaEmpleados",listaEmpledos);
-=======
-        List<Employees> listaEmpleados = employeesRepository.findAll();
-        model.addAttribute("listaEmpleados",listaEmpleados);
->>>>>>> P3
         return "employees/lista";
     }
 
@@ -92,8 +87,8 @@ public class EmployeesController {
     }
     @GetMapping("/borrar")
     public String borrarEmpleado(Model model,
-                                @RequestParam("id") int id,
-                                RedirectAttributes attr) {
+                                 @RequestParam("id") int id,
+                                 RedirectAttributes attr) {
 
         Optional<Employees> optEmployee = employeesRepository.findById(id);
 
