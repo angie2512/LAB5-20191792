@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/librerias.html :: cabecera (titulo = 'Lista Empleados')">
+<head th:insert="~{fragments/librerias.html :: cabecera (titulo = 'Lista Empleados')}">
 </head>
 <body id="page-top" style="padding-top: 70px;">
 <div class="container">
@@ -15,7 +15,7 @@
         <div class="search-bar">
             <form class="search-form d-flex align-items-center col-lg bg-body-tertiary" method="post" th:action="@{/employees/buscar}">
                 <input class="form-control me-2" type="search" placeholder="Buscar Empleado" aria-label="Search" name="buscando">
-                <button class="btn btn-outline-primary" method="post" th:action="@{/employees/buscar}" >Buscar</i></button>
+                <button class="btn btn-outline-primary" type="submit" >Buscar</i></button>
                 <button class="btn btn-outline-danger" type="submit">Limpiar</i></button>
             </form>
         </div><!-- End Search Bar -->
@@ -42,9 +42,9 @@
             <td th:text="${info.index + 1}"></td>
             <td th:text="${employees.firstName}"></td>
             <td th:text="${employees.lastName}"></td>
-            <td th:text="${employees.job.jobTitle}"></td>
-            <td th:text="${employees.getDepartment().getDepartmentName()}"></td>
-            <td th:text="${employees.getDepartment().getLocation().getCity()}"></td>
+                  <td th:text="${employees.job.jobTitle}"></td>
+                  <td th:text="${employees.getDepartment().getDepartmentName()}"></td>
+                  <td th:text="${employees.getDepartment().getLocation().getCity()}"></td>
 
 
             <td><a class="btn btn-primary">Editar</a></td>

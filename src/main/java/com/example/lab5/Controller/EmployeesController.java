@@ -32,7 +32,8 @@ public class EmployeesController {
 
     @GetMapping(value = {"", "/lista"})
     public String listaEmployees(Model model) {
-        List<Employees> listaEmpledos = employeesRepository.findAll();
+
+        List<Employees> listaEmpledos = employeesRepository.listado();
         model.addAttribute("listaEmpleados",listaEmpledos);
         return "employees/lista";
     }
@@ -79,7 +80,7 @@ public class EmployeesController {
     public String buscarEmployees(@RequestParam("buscando") String buscando,
                                       Model model) {
 
-        List<Employees> listaEmployees = employeesRepository.buscarEmpleado(buscando);
+        List<Employees> listaEmployees = employeesRepository.buscarEmpleado(buscando.toLowerCase());
         model.addAttribute("listaEmpleados", listaEmployees);
 
         return "employees/lista";
@@ -92,7 +93,9 @@ public class EmployeesController {
         Optional<Employees> optEmployee = employeesRepository.findById(id);
 
         if (optEmployee.isPresent()) {
-            employeesRepository.deleteById(id);
+            employeesRepository.actualiza1(id);
+            employeesRepository.actualiza2(id);
+            employeesRepository.actualiza3(id);
             attr.addFlashAttribute("msg","Empleado borrado exitosamente");
         }
         return "redirect:/employees/lista";

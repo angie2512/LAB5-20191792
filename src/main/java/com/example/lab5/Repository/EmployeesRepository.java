@@ -1,7 +1,9 @@
 package com.example.lab5.Repository;
 
 import com.example.lab5.Entity.Employees;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -14,31 +16,31 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
             "INNER JOIN jobs j ON e.job_id = j.job_id " +
             "INNER JOIN departments d ON e.department_id = d.department_id " +
             "INNER JOIN locations l ON d.location_id = l.location_id " +
-            "WHERE (lower(e.first_name) like %?1% " +
+            "WHERE ((lower(e.first_name) like %?1% " +
             "OR lower(e.last_name) like %?1% " +
             "OR lower(j.job_title) like %?1% " +
-            "OR lower(l.city) like %?1%)",nativeQuery = true)
+            "OR lower(l.city) like %?1%) and enabled=1)",nativeQuery = true)
     List<Employees> buscarEmpleado(String buscando);
 
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE departments SET manager_id=null where manager_id=?1", nativeQuery = true)
+    void actualiza1(int id);
 
-    @Query("SELECT e FROM Employees e " +
-            "INNER JOIN e.job j " +
-            "INNER JOIN e.department d " +
-            "INNER JOIN d.location l " +
-            "WHERE e.lastName LIKE CONCAT('%', ?1, '%') "+
-            "OR j.jobTitle LIKE CONCAT('%', ?1, '%') "+
-            "or d.departmentName LIKE CONCAT('%', ?1, '%') "+
-            "OR l.city LIKE CONCAT('%', ?1, '%') ")
-    List<Employees> test2(String searchTerm);
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE employees e SET enabled=0 where employee_id=?1", nativeQuery = true)
+    void actualiza2(int id);
 
-    @Query("SELECT e FROM Employees e " +
-            "INNER JOIN e.job j " +
-            "INNER JOIN e.department d " +
-            "INNER JOIN d.location l " +
-            "WHERE e.lastName LIKE %?1% "+
-            "OR j.jobTitle LIKE %?1% "+
-            "or d.departmentName LIKE  %?1% "+
-            "OR l.city LIKE  %?1% ")
-    List<Employees> testeee(String searchTerm);
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE employees SET manager_id=null WHERE employee_id IN" +
+            "       (SELECT employee_id FROM (SELECT employee_id FROM employees WHERE manager_id= ?1) AS subquery)", nativeQuery = true)
+    void actualiza3(int id);
+
+
+    @Query(value = "SELECT * FROM employees where enabled=1", nativeQuery = true)
+    List<Employees> listado();
+
 
 }
