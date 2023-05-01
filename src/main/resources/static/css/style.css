@@ -790,6 +790,9 @@ h6 {
   transition: 0.3s;
   font-size: 16px;
 }
+body > div {
+  margin-top: 56px; /* altura de la barra de navegación */
+}
 
 .dashboard .filter .icon:hover,
 .dashboard .filter .icon:focus {

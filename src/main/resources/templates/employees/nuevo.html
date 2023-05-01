@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:insert="fragments/librerias.html :: cabecera (titulo = 'Nuevo Empleado')">
+</head>
+<body>
+
+
+<div th:replace="~{fragments/header.html ::header}">
+</div>
+
+<div class="container mt-5">
+  <h2 th:text="${employees.employeeId == 0? 'Nuevo Ingreso' : 'Editar Empleado'}">Nuevo Empleado</h2>
+
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <div class="card cen" style="height: 650px; width: 1200px; overflow-y: auto;">
+        <div class="card-body">
+          <form method="post" th:action="@{/employees/guardar}" th:object="${employees}">
+            <input th:if="*{employeeId != 0 }" type="hidden" th:field="*{employeeId}" />
+
+            <div class="form-group">
+              <label class="large mb-1">Nombre</label>
+              <input class="form-control" th:field="*{firstName}">
+            </div>
+
+            <div class="form-group">
+              <label class="large mb-1">Apellido</label>
+              <input class="form-control" th:field="*{lastName}">
+            </div>
+
+            <div class="form-group">
+              <label class="large mb-1">Email</label>
+              <input class="form-control" th:field="*{email}">
+            </div>
+
+            <div class="form-group">
+              <label class="large mb-1">Contraseña</label>
+              <input class="form-control" type="password" th:field="*{password}">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Puesto</label>
+              <select class="form-control" th:field="*{job.jobId}">
+                <option th:each="jobs : ${listaPuestos}" th:value="${jobs.jobId}"
+                        th:text="${jobs.jobTitle}"></option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="large mb-1">Sueldo</label>
+              <input class="form-control" th:field="*{salary}">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Jefe</label>
+              <select class="form-control" th:field="*{manager.employeeId}">
+                <option th:each="employees : ${listaEmpleados}" th:value="${employees.employeeId}"
+                        th:text="${employees.firstName + ' ' + employees.lastName}"></option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Departamento</label>
+              <select class="form-control" th:field="*{department}">
+                <option th:each="department : ${listaDepartamentos}" th:value="${department.departmentId}"
+                        th:text="${department.departmentName}"></option>
+              </select>
+            </div>
+
+            <div class="form-group mt-4">
+              <a th:href="@{/employees/lista}" class="btn btn-danger">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

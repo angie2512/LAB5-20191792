@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/librerias.html :: cabecera (titulo = 'Lista Empleados')">
+</head>
+<body id="page-top" style="padding-top: 70px;">
+<div class="container">
+    <div th:replace="~{fragments/header.html ::header}">
+    </div>
+    <h1>Empleados Totales</h1>
+    <div class="container-fluid">
+
+
+        <a class="btn btn-primary mt-4 mb-4" th:href="@{/employees/nuevo}">Nuevo Empleado</a>
+
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center col-lg bg-body-tertiary" method="post" th:action="@{/employees/buscar}">
+                <input class="form-control me-2" type="search" placeholder="Buscar Empleado" aria-label="Search" name="buscando">
+                <button class="btn btn-outline-primary" method="post" th:action="@{/employees/buscar}" >Buscar</i></button>
+                <button class="btn btn-outline-danger" type="submit">Limpiar</i></button>
+            </form>
+        </div><!-- End Search Bar -->
+
+    <div>
+        <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+
+        <div>
+        <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Puesto</th>
+            <th>Departamento</th>
+            <th>Ciudad</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employees, info : ${listaEmpleados}">
+            <td th:text="${info.index + 1}"></td>
+            <td th:text="${employees.firstName}"></td>
+            <td th:text="${employees.lastName}"></td>
+            <td th:text="${employees.job.jobTitle}"></td>
+            <td th:text="${employees.getDepartment().getDepartmentName()}"></td>
+            <td th:text="${employees.getDepartment().getLocation().getCity()}"></td>
+
+
+            <td><a class="btn btn-primary">Editar</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/employees/borrar' + '?id=' + ${employees.employeeId}}">Borrar</a></td>
+        </tr>
+        </tbody>
+        </table></div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.lab5.Entity;
 
+import com.example.lab5.Controller.EmployeesController;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -7,12 +8,13 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Table(name="employees")
 public class Employees {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "employee_id")
+    private int employeeId;
 
-    @Column (name = "employee_id")
-    private String employeeId;
     @Basic
     @Column(name = "first_name")
     private String firstName;
@@ -42,7 +44,7 @@ public class Employees {
     private BigDecimal commissionPct;
     @ManyToOne
     @JoinColumn(name = "manager_id")
-    private Departments managerId;
+    private Employees manager;
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Departments department;
@@ -134,20 +136,20 @@ public class Employees {
         return department;
     }
 
-    public String getEmployeeId() {
+    public int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(String employeeId) {
+    public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Departments getManagerId() {
-        return managerId;
+    public Employees getManager() {
+        return manager;
     }
 
-    public void setManagerId(Departments managerId) {
-        this.managerId = managerId;
+    public void setManager(Employees manager) {
+        this.manager = manager;
     }
 
     public void setDepartment(Departments department) {
