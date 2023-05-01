@@ -21,7 +21,7 @@
   <main id="main" class="main">
     <section class="section">
       <div class="row d-flex justify-content-center">
-        <div class="col-lg-10">
+        <div class="col-lg-30">
           <div class="card justify-content-center">
             <div class="card-body">
 
@@ -33,16 +33,18 @@
                     <th scope="col">Puesto</th>
                     <th scope="col">Salario Máximo</th>
                     <th scope="col">Salario Mínimo</th>
+                    <th scope="col">Salario Total</th>
+                    <th scope="col">Salario Promedio</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="jobs, info : ${listaTrabajos}">
+                  <tr th:each="salarios, info : ${salariosDTO}">
                     <td th:text="${info.index+ 1}"></td>
-                    <td th:text="${jobs.jobTitle}"></td>
-                    <td th:text="${jobs.maxSalary}"></td>
-                    <td th:text="${jobs.minSalary}"></td>
-                    <td th:text="${totalSalario}"></td>
-
+                    <td th:text="${salarios.getPuesto()}"></td>
+                    <td th:text="${salarios.getMaxSalario()}"></td>
+                    <td th:text="${salarios.getMinSalario()}"></td>
+                    <td th:text="${salarios.getTotalSalario()}"></td>
+                    <td th:text="${salarios.getPromSalario()}"></td>
                   </tr>
                   </tbody>
                 </table>

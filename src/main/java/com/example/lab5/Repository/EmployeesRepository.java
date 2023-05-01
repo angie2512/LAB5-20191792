@@ -1,5 +1,6 @@
 package com.example.lab5.Repository;
 
+import com.example.lab5.DTO.SalariosDTO;
 import com.example.lab5.Entity.Employees;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -41,7 +42,12 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
             "OR l.city LIKE  %?1% ")
     List<Employees> testeee(String searchTerm);
 
-    @Query("SELECT SUM(e.salary) FROM Employees e JOIN e.job j WHERE j.jobTitle = :jobTitle")
-    Long getTotalSalaryByJobTitle(@Param("jobTitle") String jobTitle);
+    @Query(value = "SELECT j.job_title as puesto, j.max_salary as maxsalario, j.min_salary as minsalario," +
+            "       SUM(e.salary) as totalsalario, ROUND(AVG(e.salary),2) as promsalario" +
+            " FROM employees e" +
+            "         INNER JOIN jobs j ON e.job_id = j.job_id" +
+            " GROUP BY j.job_id, j.job_title, j.max_salary, j.min_salary" +
+            " ORDER BY j.job_id", nativeQuery = true)
+    List<SalariosDTO> salariodto();
 
 }

@@ -1,5 +1,6 @@
 package com.example.lab5.Controller;
 
+import com.example.lab5.DTO.SalariosDTO;
 import com.example.lab5.Entity.Employees;
 import com.example.lab5.Entity.Jobs;
 import com.example.lab5.Repository.EmployeesRepository;
@@ -28,10 +29,8 @@ public class ReportesController {
 
     @GetMapping(value = "/salario")
     public String salario(Model model) {
-        List<Jobs> listaTrabajos = jobsRepository.findAll();
-        model.addAttribute("listaTrabajos",listaTrabajos);
-        Long totalSalario = employeesRepository.getTotalSalaryByJobTitle("Puesto especificado");
-        model.addAttribute("totalSalario", totalSalario);
+        List<SalariosDTO> salariosDTO = employeesRepository.salariodto();
+        model.addAttribute("salariosDTO",salariosDTO);
         return "reportes/salario";
     }
 
