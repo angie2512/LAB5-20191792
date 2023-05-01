@@ -18,7 +18,7 @@ public class HomeController {
     @GetMapping(value = "/inicio")
     public String inicio() {
 
-        return "/traveltrip";
+        return "traveltrip";
     }
 
 
