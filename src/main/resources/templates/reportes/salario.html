@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/librerias.html :: cabecera (titulo = 'Salario')">
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<div th:replace="~{fragments/header.html ::header}">
+</div>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside th:replace="fragments/aside.html :: sidebar (active = 'salario')">
+</aside>
+
+<div class="container">
+  <div th:replace="~{fragments/header.html ::header}">
+  </div>
+
+  <main id="main" class="main">
+    <section class="section">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-30">
+          <div class="card justify-content-center">
+            <div class="card-body">
+
+              <h5 class="card-title">Reporte Sueldos</h5>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Puesto</th>
+                    <th scope="col">Salario Máximo</th>
+                    <th scope="col">Salario Mínimo</th>
+                    <th scope="col">Salario Total</th>
+                    <th scope="col">Salario Promedio</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="salarios, info : ${salariosDTO}">
+                    <td th:text="${info.index+ 1}"></td>
+                    <td th:text="${salarios.getPuesto()}"></td>
+                    <td th:text="${salarios.getMaxSalario()}"></td>
+                    <td th:text="${salarios.getMinSalario()}"></td>
+                    <td th:text="${salarios.getTotalSalario()}"></td>
+                    <td th:text="${salarios.getPromSalario()}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

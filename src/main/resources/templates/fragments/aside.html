@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<aside th:fragment="sidebar (active)" id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item" th:classappend="${active == 'salario' ? 'inactive':''}">
+            <a class="nav-link" th:classappend="${active != 'salario' ? 'collapsed':''}" th:href="@{'/salario'}">
+                <i class="bi bi-grid"></i>
+                <span>Salario</span>
+            </a>
+        </li><!-- End Dashboard -->
+
+        <li class="nav-item" th:classappend="${active == 'tentativaaumento' ? 'active':''}">
+            <a class="nav-link" th:classappend="${active != 'tentativaaumento' ? 'collapsed':''}" th:href="@{'/tentativa'}">
+                <i class="bi bi-person-plus-fill"></i><span>Tentativa Aumento</span>
+            </a>
+        </li><!-- End Components Nav -->
+</aside><!-- End Sidebar-->
+
+</body>
+</html>

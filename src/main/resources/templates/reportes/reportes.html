@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/librerias.html :: cabecera (titulo = 'Lista Empleados')">
+</head>
+<body id="page-top" style="padding-top: 70px;">
+<!-- ======= Sidebar ======= -->
+<aside th:replace="fragments/aside.html :: sidebar (active = null)">
+</aside>
+
+<div class="container">
+  <div th:replace="~{fragments/header.html ::header}">
+  </div>
+
+  <div>
+    <center>
+      <h1 style="text-align: center">Reportes y Dashboards</h1>
+    </center>
+  </div>
+</div>
+</body>
+</html>
