@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/librerias.html :: cabecera (titulo = 'Salario')">
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<div th:replace="~{fragments/header.html ::header}">
+</div>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside th:replace="fragments/aside.html :: sidebar (active = 'salario')">
+</aside>
+
+<div class="container">
+  <div th:replace="~{fragments/header.html ::header}">
+  </div>
+
+  <main id="main" class="main">
+    <section class="section">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-10">
+          <div class="card justify-content-center">
+            <div class="card-body">
+
+              <h5 class="card-title">Reporte Sueldos</h5>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Puesto</th>
+                    <th scope="col">Salario Máximo</th>
+                    <th scope="col">Salario Mínimo</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="jobs, info : ${listaTrabajos}">
+                    <td th:text="${info.index+ 1}"></td>
+                    <td th:text="${jobs.jobTitle}"></td>
+                    <td th:text="${jobs.maxSalary}"></td>
+                    <td th:text="${jobs.minSalary}"></td>
+                    <td th:text="${totalSalario}"></td>
+
+                  </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

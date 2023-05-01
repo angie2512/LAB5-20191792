@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head th:insert="fragments/librerias.html :: cabecera (titulo = 'Tentativa Aumento')">
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<div th:replace="~{fragments/header.html ::header}">
+</div>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside th:replace="fragments/aside.html :: sidebar (active = 'tentativaaumento')">
+</aside>
+
+<main>
+    <div class="container">
+
+        <section class="section error-404 min-vh-100 d-flex flex-column align-items-center d-flex justify-content-center" >
+            <h1>Reporte-Tentativa Aumento</h1>
+            <h2>La página se encuentra en construcción</h2>
+            <a class="btn" th:href="@{'/inicio'}">Volver al inicio</a>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

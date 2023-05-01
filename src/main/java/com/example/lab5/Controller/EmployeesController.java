@@ -32,8 +32,8 @@ public class EmployeesController {
 
     @GetMapping(value = {"", "/lista"})
     public String listaEmployees(Model model) {
-        List<Employees> listaEmpledos = employeesRepository.findAll();
-        model.addAttribute("listaEmpleados",listaEmpledos);
+        List<Employees> listaEmpleados = employeesRepository.findAll();
+        model.addAttribute("listaEmpleados",listaEmpleados);
         return "employees/lista";
     }
 

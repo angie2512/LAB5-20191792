@@ -41,4 +41,7 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
             "OR l.city LIKE  %?1% ")
     List<Employees> testeee(String searchTerm);
 
+    @Query("SELECT SUM(e.salary) FROM Employees e JOIN e.job j WHERE j.jobTitle = :jobTitle")
+    Long getTotalSalaryByJobTitle(@Param("jobTitle") String jobTitle);
+
 }
